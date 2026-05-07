@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produk Kopi NESCAFÉ® | NESCAFÉ Indonesia</title>
+    
+    <!-- Google Fonts & Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-p6Iu+7u4E8yQz3z4h8+G3M0O9iC6M7aV8Gf6xP3j2yK5LJa71ZKZaJ1dPZ1lEwYc55h6z0l0A2EgXISlcfAs0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+/* Animasi Muncul */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Animasi Menghilang */
+@keyframes fadeOut {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(-10px); }
+}
+
+body {
+    animation: fadeIn 0.8s ease-out; /* Muncul perlahan saat halaman dibuka */
+}
+
+/* Kelas tambahan untuk efek keluar */
+.fade-out {
+    animation: fadeOut 0.5s ease-in forwards;
+}
+
+
+
+        :root {
+            --nes-red: #e63946;
+            --nes-gray-bg: #f9f9f7;
+            --nes-border: #e0e0e0;
+            --bg: linear-gradient(180deg, #0a0e14 0%, #0f1419 100%);
+            --nes-text: #e8e8e8;
+            --nes-muted: #a0a8b8;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Open Sans', sans-serif; background: var(--bg); color: var(--nes-text); }
+
+        /* Header Reusable dari Halaman Utama */
+        header {
+            background: rgba(26, 31, 46, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(230, 57, 70, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #eee;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: top 0.4s ease-in-out;
+        }
+        .nav-up { top: -100px; }
+        .logo img { height: 30px; }
+        nav ul { list-style: none; display: flex; gap: 12px; }
+        nav > ul > li { padding: 10px 15px; }
+        nav > ul > li > a { 
+            text-decoration: none; 
+            color: var(--nes-text); 
+            font-weight: 600; 
+            font-size: 13px; 
+            text-transform: uppercase; 
+            letter-spacing: 0.5px;
+            transition: color 0.3s ease;
+        }
+        .dropdown-content { display: none; position: absolute; top: 100%; left: 0; background: rgba(16, 20, 30, 0.98); backdrop-filter: blur(10px); min-width: 220px; box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4); padding: 12px 0; border-top: 2px solid var(--nes-red); border-radius: 0 0 12px 12px; }
+        .dropdown-content a { color: var(--nes-muted); padding: 12px 20px; text-decoration: none; display: block; font-size: 14px; transition: 0.2s; }
+        .dropdown-content a:hover { background: rgba(230, 57, 70, 0.1); color: var(--nes-red); }
+        nav > ul > li:hover .dropdown-content { display: block; }
+        .search-box { display: flex; align-items: center; justify-content: center; }
+        .search-box i { font-size: 18px; cursor: pointer; color: var(--nes-text); }
+        /* Category Hero Section */
+        .category-header {
+            background: linear-gradient(135deg, rgba(10, 14, 20, 0.8) 0%, rgba(26, 31, 46, 0.8) 100%);
+            padding: 60px 10%;
+            text-align: center;
+            position: relative;
+        }
+        .category-header::after { content: ''; position: absolute; inset: 0; background: rgba(0, 0, 0, 0.35); z-index: 1; }
+        .category-header h1 { font-size: 3rem; font-weight: 800; margin-bottom: 15px; position: relative; z-index: 2; color: var(--nes-text); }
+        .category-header p { max-width: 700px; margin: 0 auto; color: var(--nes-muted); font-size: 1.1rem; position: relative; z-index: 2; }
+
+        /* Filter & Sorting Bar */
+        .filter-bar {
+            border-bottom: 1px solid rgba(230, 57, 70, 0.2);
+            padding: 20px 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(26, 31, 46, 0.3);
+        }
+        .filter-options select {
+            padding: 10px 20px;
+            border-radius: 25px;
+            border: 1px solid rgba(230, 57, 70, 0.3);
+            outline: none;
+            font-weight: 600;
+            background: rgba(26, 31, 46, 0.6);
+            color: var(--nes-text);
+        }
+
+        /* Product Catalog Grid */
+        .catalog-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 40px;
+            padding: 50px 10%;
+        }
+
+        .product-item {
+            text-align: center;
+            border-radius: 15px;
+            padding: 30px;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            cursor: pointer;
+            background: rgba(26, 31, 46, 0.6);
+            border: 1px solid rgba(230, 57, 70, 0.15);
+        }
+        .product-item:hover { 
+            transform: translateY(-8px);
+            background: rgba(26, 31, 46, 0.8);
+            border-color: var(--nes-red);
+            box-shadow: 0 24px 48px rgba(230, 57, 70, 0.2);
+        }
+        
+        .image-wrapper {
+            background: rgba(26, 31, 46, 0.3);
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 300px;
+            border: 1px solid rgba(230, 57, 70, 0.1);
+        }
+        .product-item img {
+            max-width: 100%;
+            max-height: 100%;
+            transition: 0.4s ease-in-out;
+        }
+        .product-item:hover img { transform: scale(1.1); }
+
+        .product-tag {
+            background: var(--nes-red);
+            color: white;
+            font-size: 10px;
+            font-weight: 800;
+            padding: 5px 12px;
+            border-radius: 50px;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .product-item h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 10px; color: var(--nes-text); }
+        .product-item p { font-size: 0.9rem; color: var(--nes-muted); margin-bottom: 20px; }
+
+        /* Button Detail */
+        .btn-outline {
+            border: 2px solid var(--nes-red);
+            padding: 10px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--nes-text);
+            font-weight: 700;
+            font-size: 12px;
+            text-transform: uppercase;
+            transition: 0.3s;
+            background: transparent;
+        }
+        .btn-outline:hover { background: var(--nes-red); color: #fff; }
+
+        /* Footer Copy */
+      footer { background: #1a1a1a; color: #fff; padding: 60px 10%; text-align: center; }
+        .footer-social { margin-bottom: 30px; font-size: 24px; }
+        .footer-social i { margin: 0 15px; cursor: pointer; transition: 0.3s; }
+        .footer-social i:hover { color: var(--nes-red); }
+        .footer-links { font-size: 12px; color: #888; }
+        .footer-links a { color: #888; text-decoration: none; margin: 0 10px; text-transform: uppercase; }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        @media (max-width: 1024px) {
+            header {
+                padding: 15px 4%;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
+
+            .category-header {
+                padding: 50px 8%;
+            }
+
+            .filter-bar {
+                padding: 20px 8%;
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+
+            .catalog-container {
+                padding: 40px 8%;
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            }
+        }
+
+        @media (max-width: 720px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            nav ul {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .category-header h1 {
+                font-size: 2.4rem;
+            }
+
+            .filter-bar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .catalog-container {
+                padding: 30px 5%;
+                grid-template-columns: 1fr;
+            }
+
+            .image-wrapper {
+                height: auto;
+                padding: 25px;
+            }
+
+            .product-item {
+                padding: 25px;
+            }
+
+            footer {
+                padding: 40px 5%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <a href="index.html"><img src="https://www.nescafe.com/id/sites/default/files/latest_logo_white.png" alt="Logo"></a>
+        </div>
+        <nav>
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <ul>
+
+                <li><a href="produk-kopi.html">KOPI</a></li>
+                <li><a href="resep.html">RESEP</a></li>
+                <li><a href="about.html">KEBERLANJUTAN</a></li>
+                <li><a href="index.html">HOME</a></li> 
+            </ul>
+        </nav>
+        <div><i class="fas fa-search"></i></div>
+    </header>
+
+    <!-- Header Halaman Kopi -->
+    <section class="category-header">
+        <div class="product-tag">Katalog Produk</div>
+        <h1>Semua Kopi Kami</h1>
+        <p>Jelajahi berbagai pilihan kopi NESCAFÉ®, mulai dari kopi murni instan, campuran krimer-gula yang nikmat, hingga biji kopi panggang premium.</p>
+    </section>
+
+    <!-- Bar Filter -->
+    <div class="filter-bar">
+        <div class="results-count">Menampilkan <strong>6 Produk</strong></div>
+        <div class="filter-options">
+            <label>Urutkan:</label>
+            <select>
+                <option>Terbaru</option>
+                <option>Nama A-Z</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Katalog Produk Lengkap -->
+    <main class="catalog-container">
+        
+        <!-- Produk 1 -->
+        <div class="product-item">
+            <div class="image-wrapper">
+                <img src="https://www.nescafe.com/id/sites/default/files/styles/plp_card_image/public/2025-03/01_NESCAFE%20Classic%20New%20Label%203D%20Preview_45g_960.png.webp?itok=OoUIsoD-" alt="Classic">
+            </div>
+            <h3>NESCAFÉ Classic</h3>
+            <p>100% Kopi murni instan dengan rasa mantap.</p>
+            <a href="#" class="btn-outline">Lihat Detail</a>
+        </div>
+
+        <!-- Produk 2 -->
+        <div class="product-item">
+            <div class="image-wrapper">
+                <img src="https://www.nescafe.com/id/sites/default/files/styles/plp_card_image/public/2023-07/208961830%20-%20HP_Gold-Decaf-100_960x960.png.webp?itok=I1UNP-Ij" alt="Gold">
+            </div>
+            <h3>NESCAFÉ Gold</h3>
+            <p>Perpaduan kopi Arabika dan Robusta berkualitas tinggi.</p>
+            <a href="#" class="btn-outline">Lihat Detail</a>
+        </div>
+
+        <!-- Produk 3 -->
+        <div class="product-item">
+            <div class="image-wrapper">
+                <img src="https://www.nescafe.com/id/sites/default/files/styles/pdp_banner_image/public/2025-03/ID_NESCAFE_0723_Packshot_NESCAFE%203in1%20Original%20PBG_30x17.5g%20960px.png.webp?itok=FqqzChqq" alt="3in1">
+            </div>
+            <h3>NESCAFÉ 3in1 Original</h3>
+            <p>Paduan kopi, krimer, dan gula yang pas.</p>
+            <a href="#" class="btn-outline">Lihat Detail</a>
+        </div>
+
+        <!-- Produk 4 -->
+        <div class="product-item">
+            <div class="image-wrapper">
+                <img src="https://www.nescafe.com/id/sites/default/files/styles/plp_card_image/public/2023-07/208962112%20-%20HP_NDG-Capsule-16-caps-Grande-Intenso-Box_960x960.png.webp?itok=VLmDI8nj" alt="Kopi Tubruk">
+            </div>
+            <h3>NESCAFÉ Grande Intenso</h3>
+            <p>Kopi hitam dengan ampas, citarasa tradisional Indonesia.</p>
+            <a href="#" class="btn-outline">Lihat Detail</a>
+        </div>
+
+        <!-- Produk 5 -->
+        <div class="product-item">
+            <div class="image-wrapper">
+                <img src="https://www.nescafe.com/id/sites/default/files/styles/plp_card_image/public/2025-03/Nescafe%20New%20Can%20Ice%20960_0.png.webp?itok=8XmojZS8" alt="Ala Cafe">
+            </div>
+            <h3>NESCAFÉ Ala Café</h3>
+            <p>Kopi siap minum dengan rasa ala cafe favoritmu.</p>
+            <a href="#" class="btn-outline">Lihat Detail</a>
+        </div>
+
+        <!-- Produk 6 -->
+        <div class="product-item">
+            <div class="image-wrapper">
+                <img src="https://www.nescafe.com/id/sites/default/files/styles/plp_card_image/public/2023-07/208962107%20-%20HP_NDG-Capsule-16-caps-Cappucino_960x960_0.png.webp?itok=AKNqXE5-" alt="Cappuccino">
+            </div>
+            <h3>NESCAFÉ Cappuccino</h3>
+            <p>Dengan buih melimpah dan rasa kopi yang creamy.</p>
+            <a href="#" class="btn-outline">Lihat Detail</a>
+        </div>
+
+    </main>
+
+    <footer>
+        <p> <footer>
+        <div class="footer-social">
+            <i class="fab fa-facebook-f"></i>
+            <i class="fab fa-instagram"></i>
+            <i class="fab fa-youtube"></i>
+            <i class="fab fa-twitter"></i>
+        </div>
+        <div class="footer-links">
+            <a href="#">Kebijakan Privasi</a> | 
+            <a href="#">Syarat & Ketentuan</a> | 
+            <a href="#">Hubungi Kami</a>
+        </div>
+        <p style="font-size: 10px; color: #555; margin-top: 20px;">Web ini bukan web resmi dari NESCAFE, melainkan hanya Web yang saya buat untuk belajar </p>
+    </footer></p>
+    </footer>
+    <script>
+let lastScrollTop = 0;
+const navbar = document.querySelector('header');
+
+window.addEventListener('scroll', function() {
+    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+    if (scrollTop > lastScrollTop && scrollTop > 100) {
+        // Jika scroll ke BAWAH, sembunyikan navbar
+        navbar.classList.add('nav-up');
+    } else {
+        // Jika scroll ke ATAS, munculkan navbar
+        navbar.classList.remove('nav-up');
+    }
+    
+    lastScrollTop = scrollTop;
+});
+
+
+
+    // Mencari semua link yang menuju ke halaman lain
+    document.querySelectorAll('nav a, .btn, .logo a').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault(); // Berhenti pindah halaman mendadak
+            let targetUrl = this.href;
+
+            // Tambahkan kelas fade-out ke body
+            document.body.classList.add('fade-out');
+
+            // Tunggu animasi selesai (0.5 detik), baru pindah halaman
+            setTimeout(() => {
+                window.location.href = targetUrl;
+            }, 500);
+        });
+    });
+</script>
+
+
+</body>
+</html>

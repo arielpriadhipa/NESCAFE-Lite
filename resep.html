@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resep Kopi NESCAFÉ® | Kreativitas di Cangkir Anda</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-p6Iu+7u4E8yQz3z4h8+G3M0O9iC6M7aV8Gf6xP3j2yK5LJa71ZKZaJ1dPZ1lEwYc55h6z0l0A2EgXISlcfAs0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+/* Animasi Muncul */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Animasi Menghilang */
+@keyframes fadeOut {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(-10px); }
+}
+
+body {
+    animation: fadeIn 0.8s ease-out; /* Muncul perlahan saat halaman dibuka */
+}
+
+/* Kelas tambahan untuk efek keluar */
+.fade-out {
+    animation: fadeOut 0.5s ease-in forwards;
+}
+
+
+
+        :root { --nes-red: #e63946; --bg: linear-gradient(180deg, #0a0e14 0%, #0f1419 100%); --nes-text: #e8e8e8; --nes-muted: #a0a8b8; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Open Sans', sans-serif; background: var(--bg); color: var(--nes-text); }
+        
+        /* Navbar Simple */
+        header { background: rgba(26, 31, 46, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(230, 57, 70, 0.2); padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; transition: top 0.4s ease-in-out; }
+        .nav-up { top: -100px; }
+        .logo img { height: 30px; }
+        nav ul { list-style: none; display: flex; gap: 10px; }
+        nav > ul > li { position: relative; padding: 10px 15px; }
+        nav > ul > li > a { text-decoration: none; color: var(--nes-text); font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; transition: color 0.3s ease; }
+        .dropdown-content { display: none; position: absolute; top: 100%; left: 0; background: rgba(16, 20, 30, 0.98); backdrop-filter: blur(10px); min-width: 220px; box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4); padding: 12px 0; border-top: 2px solid var(--nes-red); border-radius: 0 0 12px 12px; }
+        .dropdown-content a { color: var(--nes-muted); padding: 12px 20px; text-decoration: none; display: block; font-size: 14px; transition: 0.2s; }
+        .dropdown-content a:hover { background: rgba(230, 57, 70, 0.1); color: var(--nes-red); }
+        nav > ul > li:hover .dropdown-content { display: block; }
+        .search-box i { font-size: 18px; cursor: pointer; color: var(--nes-text); }
+        
+        /* Hero Resep */
+        .recipe-hero { background: linear-gradient(135deg, rgba(10, 14, 20, 0.8) 0%, rgba(26, 31, 46, 0.8) 100%); color: white; padding: 80px 10%; text-align: center; position: relative; }
+        .recipe-hero::after { content: ''; position: absolute; inset: 0; background: rgba(0, 0, 0, 0.35); z-index: 1; }
+        .recipe-hero h1, .recipe-hero p { position: relative; z-index: 2; }
+        .recipe-hero h1 { font-size: 3rem; margin-bottom: 15px; }
+
+        /* Recipe Grid */
+        .container { padding: 50px 10%; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .recipe-card { background: rgba(26, 31, 46, 0.6); border: 1px solid rgba(230, 57, 70, 0.15); border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), transform 0.3s ease, box-shadow 0.3s ease; cursor: pointer; }
+        .recipe-card:hover { transform: translateY(-10px); background: rgba(26, 31, 46, 0.8); border-color: var(--nes-red); box-shadow: 0 24px 48px rgba(230, 57, 70, 0.2); }
+        .recipe-card img { width: 100%; height: 250px; object-fit: cover; }
+        .recipe-info { padding: 25px; }
+        .recipe-info span { color: var(--nes-red); font-weight: 800; font-size: 12px; text-transform: uppercase; }
+        .recipe-info h3 { margin: 10px 0; font-size: 1.4rem; color: var(--nes-text); }
+        .btn-view { display: inline-block; margin-top: 15px; padding: 10px 25px; border: 2px solid var(--nes-red); border-radius: 8px; text-decoration: none; color: var(--nes-text); font-weight: 700; font-size: 12px; transition: 0.3s; background: transparent; }
+        .btn-view:hover { background: var(--nes-red); color: #fff; }
+
+
+        footer { background: #1a1a1a; color: #fff; padding: 60px 10%; text-align: center; }
+        .footer-social { margin-bottom: 30px; font-size: 24px; }
+        .footer-social i { margin: 0 15px; cursor: pointer; transition: 0.3s; }
+        .footer-social i:hover { color: var(--nes-red); }
+        .footer-links { font-size: 12px; color: #888; }
+        .footer-links a { color: #888; text-decoration: none; margin: 0 10px; text-transform: uppercase; }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        @media (max-width: 1024px) {
+            header {
+                padding: 15px 4%;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
+
+            .recipe-hero {
+                padding: 60px 8%;
+            }
+
+            .recipe-info {
+                padding: 20px;
+            }
+
+            .container {
+                padding: 40px 8%;
+            }
+        }
+
+        @media (max-width: 720px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            nav ul {
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .recipe-hero {
+                padding: 50px 5%;
+            }
+
+            .recipe-hero h1 {
+                font-size: 2.4rem;
+            }
+
+            .container {
+                padding: 30px 5%;
+                grid-template-columns: 1fr;
+            }
+
+            .recipe-card img {
+                height: auto;
+            }
+
+            footer {
+                padding: 40px 5%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo"><img src="https://www.nescafe.com/id/sites/default/files/latest_logo_white.png" alt="NESCAFÉ Logo"></div>
+        <nav>
+            <ul>
+                <li><a href="index.html">HOME</a></li>
+                <li>
+                    <a href="produk-kopi.html">Kopi</a></li>
+                <li><a href="resep.html">Resep</a></li>
+                <li><a href="contact.html">Hubungi Kami</a></li>
+                <li><a href="about.html">Tentang Kami</a></li>
+            </ul>
+        </nav>
+        <div class="search-box">
+            <i class="fas fa-search"></i>
+        </div>
+    </header>
+
+    <section class="recipe-hero">
+        <h1>Inspirasi Resep Kopi</h1>
+        <p>Jadilah barista di rumah Anda sendiri dengan panduan resep mudah kami.</p>
+    </section>
+
+    <div class="container">
+        <!-- Resep 1 -->
+        <div class="recipe-card">
+            <img src="https://www.nescafe.com/id/sites/default/files/2023-04/RecipeHero_IcedShakenEspresso_1066x1066_compressed.jpg" alt="Iced Shaken">
+            <div class="recipe-info">
+                <span>Kopi Dingin</span>
+                <h3>Iced Shaken Espresso</h3>
+                <p>Segarkan hari Anda dengan kocokan espresso yang creamy dan dingin.</p>
+                <a href="#" class="btn-view">BACA SELENGKAPNYA</a>
+            </div>
+        </div>
+        <!-- Resep 2 -->
+        <div class="recipe-card">
+            <img src="https://www.nescafe.com/id/sites/default/files/2023-04/RecipeHero_CaramelFrappe_1066x1066_compressed.jpg" alt="Caramel frappe">
+            <div class="recipe-info">
+                <span>Kopi Susu</span>
+                <h3>Caramel Frappe</h3>
+                <p>Sentuhan manis karamel dalam lapisan susu dan kopi yang sempurna.</p>
+                <a href="#" class="btn-view">BACA SELENGKAPNYA</a>
+            </div>
+        </div>
+        <!-- Resep 3 -->
+        <div class="recipe-card">
+            <img src="https://www.nescafe.com/id/sites/default/files/2023-07/Dalgona_Carousel_1066x1066.jpg" alt="Dalgona">
+            <div class="recipe-info">
+                <span>Tren Kopi</span>
+                <h3>Dalgona Coffee Original</h3>
+                <p>Kopi kocok legendaris yang lembut di atas susu putih dingin.</p>
+                <a href="#" class="btn-view">BACA SELENGKAPNYA</a>
+            </div>
+        </div>
+    </div>
+     <footer>
+        <div class="footer-social">
+            <i class="fab fa-facebook-f"></i>
+            <i class="fab fa-instagram"></i>
+            <i class="fab fa-youtube"></i>
+            <i class="fab fa-twitter"></i>
+        </div>
+        <div class="footer-links">
+            <a href="#">Kebijakan Privasi</a> | 
+            <a href="#">Syarat & Ketentuan</a> | 
+            <a href="#">Hubungi Kami</a>
+        </div>
+        <p style="font-size: 10px; color: #555; margin-top: 20px;">Web ini bukan web resmi dari NESCAFE, melainkan hanya Web yang saya buat untuk belajar </p>
+    </footer>
+    <script>
+let lastScrollTop = 0;
+const navbar = document.querySelector('header');
+
+window.addEventListener('scroll', function() {
+    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+    if (scrollTop > lastScrollTop && scrollTop > 100) {
+        // Jika scroll ke BAWAH, sembunyikan navbar
+        navbar.classList.add('nav-up');
+    } else {
+        // Jika scroll ke ATAS, munculkan navbar
+        navbar.classList.remove('nav-up');
+    }
+    
+    lastScrollTop = scrollTop;
+});
+
+
+
+    // Mencari semua link yang menuju ke halaman lain
+    document.querySelectorAll('nav a, .btn, .logo a').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault(); // Berhenti pindah halaman mendadak
+            let targetUrl = this.href;
+
+            // Tambahkan kelas fade-out ke body
+            document.body.classList.add('fade-out');
+
+            // Tunggu animasi selesai (0.5 detik), baru pindah halaman
+            setTimeout(() => {
+                window.location.href = targetUrl;
+            }, 500);
+        });
+    });
+</script>
+
+</body>
+</html>

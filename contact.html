@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hubungi Kami | NESCAFÉ® Indonesia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-p6Iu+7u4E8yQz3z4h8+G3M0O9iC6M7aV8Gf6xP3j2yK5LJa71ZKZaJ1dPZ1lEwYc55h6z0l0A2EgXISlcfAs0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+/* Animasi Muncul */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Animasi Menghilang */
+@keyframes fadeOut {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(-10px); }
+}
+
+:root {
+    --nes-red: #e63946;
+    --nes-black: #1a1a1a;
+    --nes-gray: #f2f2f2;
+    --nes-surface: #f6e9df;
+    --nes-surface-soft: #f4e4d6;
+    --nes-text: #e8e8e8;
+    --nes-muted: #a0a8b8;
+    --nes-border: rgba(0, 0, 0, 0.08);
+    --bg: linear-gradient(180deg, #0a0e14 0%, #0f1419 100%);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    background: var(--bg);
+    color: var(--nes-text);
+    line-height: 1.7;
+    min-height: 100vh;
+}
+
+button {
+    border: none;
+    background: none;
+    font: inherit;
+    cursor: pointer;
+}
+
+header {
+    background: rgba(26, 31, 46, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(230, 57, 70, 0.2);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding: 18px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+    transition: top 0.4s ease-in-out;
+}
+
+.logo img {
+    height: 38px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 22px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: var(--nes-text);
+    font-weight: 600;
+    font-size: 0.92rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    transition: color 0.25s ease;
+}
+
+nav ul li a:hover,
+nav ul li a.active {
+    color: var(--nes-red);
+}
+
+.nav-up {
+    top: -100px;
+}
+
+.contact-hero {
+    background: var(--nes-surface);
+    border-radius: 32px;
+    padding: 90px 10%;
+    margin: 28px 5% 0;
+    text-align: center;
+    box-shadow: 0 28px 70px rgba(0, 0, 0, 0.08);
+}
+
+.contact-hero small {
+    display: inline-block;
+    margin-bottom: 18px;
+    color: var(--nes-red);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-weight: 700;
+    font-size: 0.82rem;
+}
+
+.contact-hero h1 {
+    font-size: clamp(2.4rem, 5vw, 3.6rem);
+    font-weight: 800;
+    margin-bottom: 20px;
+    color: var(--nes-black);
+    letter-spacing: -1px;
+}
+
+.contact-hero p {
+    max-width: 720px;
+    margin: 0 auto;
+    color: var(--nes-muted);
+    font-size: 1.05rem;
+    line-height: 1.85;
+}
+
+.contact-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 5% 100px;
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 40px;
+}
+
+/* Container untuk gambar pengganti ikon */
+.info-image-wrapper {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px; /* Sama dengan desain ikon aslimu */
+    background: rgba(196, 18, 48, 0.12); /* Warna background transparan merah */
+    overflow: hidden; /* Memastikan gambar tidak keluar jalur */
+    flex-shrink: 0;
+}
+
+.info-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Agar gambar tidak gepeng */
+}
+
+
+.info-side {
+    display: grid;
+    gap: 24px;
+}
+
+.info-card {
+    background: var(--nes-surface);
+    border-radius: 30px;
+    padding: 32px;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    box-shadow: 0 28px 60px rgba(0, 0, 0, 0.06);
+}
+
+.info-card h2 {
+    font-size: 2rem;
+    margin-bottom: 18px;
+    color: var(--nes-black);
+}
+
+.info-item {
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+    margin-bottom: 22px;
+}
+
+.info-item i {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px;
+    color: var(--nes-red);
+    background: rgba(196, 18, 48, 0.12);
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+
+.info-item strong {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--nes-black);
+    font-size: 1rem;
+}
+
+.info-item p {
+    color: var(--nes-muted);
+    line-height: 1.8;
+    font-size: 0.96rem;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 18px;
+    border-radius: 999px;
+    color: var(--nes-red);
+    background: rgba(196, 18, 48, 0.08);
+    font-weight: 700;
+    font-size: 0.85rem;
+    width: max-content;
+    margin-bottom: 20px;
+}
+
+.form-side {
+        background: rgba(244, 228, 214, 0.96);
+    border-radius: 30px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 28px 60px rgba(0, 0, 0, 0.06);
+}
+
+.form-side form {
+    display: grid;
+    gap: 20px;
+}
+
+.form-group {
+    display: grid;
+    gap: 10px;
+}
+
+.form-group label {
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+    color: var(--nes-black);
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 16px 18px;
+    border-radius: 18px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    background: var(--nes-surface-soft);
+    color: var(--nes-black);
+    font-size: 1rem;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--nes-red);
+    box-shadow: 0 0 0 4px rgba(196, 18, 48, 0.08);
+}
+
+.form-group textarea {
+    min-height: 170px;
+    resize: vertical;
+}
+
+.btn-submit {
+    width: 100%;
+    background: var(--nes-red);
+    color: #fff;
+    padding: 16px 24px;
+    border-radius: 999px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+
+.btn-submit:hover {
+    background: #000;
+    transform: translateY(-2px);
+    box-shadow: 0 18px 30px rgba(196, 18, 48, 0.22);
+}
+
+.contact-note {
+    color: var(--nes-muted);
+    font-size: 0.95rem;
+    line-height: 1.8;
+    margin-top: 12px;
+}
+
+footer {
+    background: #1a1a1a;
+    color: #fff;
+    padding: 60px 10%;
+    text-align: center;
+}
+
+.footer-social {
+    margin-bottom: 28px;
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    font-size: 24px;
+}
+
+.footer-links {
+    font-size: 0.95rem;
+    color: #aaa;
+}
+
+.footer-links a {
+    color: #aaa;
+    text-decoration: none;
+    margin: 0 10px;
+    transition: color 0.25s ease;
+}
+
+.footer-links a:hover {
+    color: #fff;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+@media (max-width: 1024px) {
+    header {
+        padding: 18px 4%;
+    }
+
+    nav ul {
+        justify-content: center;
+    }
+
+    .contact-hero {
+        padding: 70px 6%;
+    }
+
+    .contact-container {
+        padding: 50px 6%;
+        gap: 32px;
+    }
+
+    .form-side {
+        padding: 32px;
+    }
+}
+
+@media (max-width: 720px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 18px;
+    }
+
+    .contact-hero {
+        padding: 55px 5%;
+    }
+
+    .contact-container {
+        padding: 30px 5%;
+        grid-template-columns: 1fr;
+    }
+
+    .form-side {
+        padding: 28px;
+    }
+}
+
+@media (max-width: 520px) {
+    header {
+        padding: 18px 5%;
+    }
+
+    .contact-hero {
+        padding: 40px 4%;
+    }
+
+    .contact-hero h1 {
+        font-size: 2.4rem;
+    }
+
+    .contact-container {
+        padding: 25px 4%;
+    }
+
+    .info-card,
+    .form-side {
+        padding: 24px;
+    }
+
+    footer {
+        padding: 40px 5%;
+    }
+}
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo"><a href="index.html"><img src="https://www.nescafe.com/id/sites/default/files/latest_logo_white.png" alt="NESCAFÉ Logo"></a></div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="produk-kopi.html">Kopi</a></li>
+                <li><a href="resep.html">Resep</a></li>
+                <li><a href="about.html">Tentang Kami</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="contact-hero">
+        <small>Hubungi Kami</small>
+        <h1>Butuh Bantuan atau Informasi Produk?</h1>
+        <p>Tim NESCAFÉ® Indonesia siap membantu Anda dengan cepat dan ramah. Isi formulir atau gunakan kontak resmi kami untuk dukungan produk, keluhan, dan informasi lengkap.</p>
+    </section>
+
+    <div class="contact-container">
+        <div class="info-side">
+            <div class="info-card">
+                <span class="badge"><i class="fas fa-headset"></i> Dukungan Pelanggan</span>
+                <h2>Layanan Konsumen Nestlé</h2>
+                <div class="info-item">
+    <div class="info-image-wrapper">
+        <img src="images/telpon.png" alt="Icon">
+    </div>
+    <div>
+        <strong>Telepon Bebas Pulsa</strong>
+        <p>0800-182-1028</p>
+    </div>
+</div>
+             
+
+                <div class="info-item">
+    <div class="info-image-wrapper">
+        <img src="images/booth.png" alt="Icon">
+    </div>
+    <div>
+        <strong>Jam Operasional Gerai/Booth</strong>
+        <p>Senin - Minggu, 10.00 - 22.00 WIB.</p>
+    </div>
+</div>
+               
+            </div>
+
+            <div class="info-card">
+                <span class="badge"><i class="fas fa-map-marker-alt"></i> Lokasi & Jam</span>
+                <h2>Alamat Kantor</h2>
+                <div class="info-item">
+                    <div class="info-image-wrapper">
+                        <img src="images/kantor.png">
+                        </div>
+                    <div>
+                        <strong>Kantor Pusat</strong>
+                        <p>Perkantoran Hijau Arkadia, Tower G, 11th Floor, Jl. Letjen T.B. Simatupang Kav. 88, Jakarta Selatan 12520.</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-image-wrapper">
+                        <img src="images/Nestlé.png">
+                    </div>
+                    <div>
+                        <strong>Email</strong>
+                        <p>nestle.indonesia@id.nestle.com</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-side">
+            <form>
+                <div class="form-group">
+                    <label for="name">Nama Lengkap</label>
+                    <input id="name" type="text" placeholder="Masukkan nama Anda">
+                </div>
+                <div class="form-group">
+                    <label for="email">Alamat Email</label>
+                    <input id="email" type="email" placeholder="email@contoh.com">
+                </div>
+                <div class="form-group">
+                    <label for="subject">Subjek</label>
+                    <input id="subject" type="text" placeholder="Tanya produk, keluhan, dll">
+                </div>
+                <div class="form-group">
+                    <label for="message">Pesan Anda</label>
+                    <textarea id="message" rows="5" placeholder="Tulis pesan Anda di sini..."></textarea>
+                </div>
+                <button type="button" class="btn-submit">Kirim Pesan</button>
+                <p class="contact-note">Info Anda akan dijaga kerahasiaannya. Kami akan merespons secepatnya.</p>
+            </form>
+        </div>
+    </div>
+     <footer>
+        <div class="footer-social">
+            <i class="fab fa-facebook-f"></i>
+            <i class="fab fa-instagram"></i>
+            <i class="fab fa-youtube"></i>
+            <i class="fab fa-twitter"></i>
+        </div>
+        <div class="footer-links">
+            <a href="#">Kebijakan Privasi</a> | 
+            <a href="#">Syarat & Ketentuan</a> | 
+            <a href="#">Hubungi Kami</a>
+        </div>
+        <p style="font-size: 10px; color: #555; margin-top: 20px;">Web ini bukan web resmi dari NESCAFE, melainkan hanya Web yang saya buat untuk belajar </p>
+    </footer>
+    <script>
+        let lastScrollTop = 0;
+const navbar = document.querySelector('header');
+
+window.addEventListener('scroll', function() {
+    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+    if (scrollTop > lastScrollTop && scrollTop > 100) {
+        // Jika scroll ke BAWAH, sembunyikan navbar
+        navbar.classList.add('nav-up');
+    } else {
+        // Jika scroll ke ATAS, munculkan navbar
+        navbar.classList.remove('nav-up');
+    }
+    
+    lastScrollTop = scrollTop;
+});
+
+
+ // Mencari semua link yang menuju ke halaman lain
+    document.querySelectorAll('nav a, .btn, .logo a').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault(); // Berhenti pindah halaman mendadak
+            let targetUrl = this.href;
+
+            // Tambahkan kelas fade-out ke body
+            document.body.classList.add('fade-out');
+
+            // Tunggu animasi selesai (0.5 detik), baru pindah halaman
+            setTimeout(() => {
+                window.location.href = targetUrl;
+            }, 500);
+        });
+    });
+    </script>
+
+    
+    
+</body>
+</html>

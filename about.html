@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tentang Kami & Keberlanjutan | NESCAFÉ®</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-p6Iu+7u4E8yQz3z4h8+G3M0O9iC6M7aV8Gf6xP3j2yK5LJa71ZKZaJ1dPZ1lEwYc55h6z0l0A2EgXISlcfAs0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+/* Animasi Muncul */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Animasi Menghilang */
+@keyframes fadeOut {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(-10px); }
+}
+
+body {
+    animation: fadeIn 0.8s ease-out; /* Muncul perlahan saat halaman dibuka */
+}
+
+/* Kelas tambahan untuk efek keluar */
+.fade-out {
+    animation: fadeOut 0.5s ease-in forwards;
+}
+
+
+         header { background: rgba(26, 31, 46, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(230, 57, 70, 0.2); padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; transition: top 0.4s ease-in-out; }
+        .nav-up { top: -100px; }
+        .logo img { height: 30px; }
+
+        
+        :root { --nes-red: #e63946; --bg: linear-gradient(180deg, #0a0e14 0%, #0f1419 100%); --nes-text: #e8e8e8; --nes-muted: #a0a8b8; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Open Sans', sans-serif; line-height: 1.8; color: var(--nes-text); background: var(--bg); }
+        
+        .hero-about { height: 60vh; background: linear-gradient(135deg, rgba(10, 14, 20, 0.8) 0%, rgba(26, 31, 46, 0.8) 100%); display: flex; align-items: center; justify-content: center; color: white; text-align: center; position: relative; }
+        .hero-about::after { content: ''; position: absolute; inset: 0; background: rgba(0, 0, 0, 0.35); z-index: 1; }
+        .hero-about h1 { font-size: 3.5rem; background: rgba(230, 57, 70, 0.8); padding: 10px 30px; border-radius: 10px; position: relative; z-index: 2; }
+
+        .content-section { padding: 80px 15%; display: flex; align-items: center; gap: 50px; background: rgba(26, 31, 46, 0.3); }
+        .content-section:nth-child(even) { flex-direction: row-reverse; background: rgba(26, 31, 46, 0.5); }
+        .text-box { flex: 1; }
+        .image-box { flex: 1; }
+        .image-box img { width: 100%; border-radius: 20px; box-shadow: 20px 20px 0 var(--nes-red); }
+
+        h2 { font-size: 2.5rem; margin-bottom: 20px; color: var(--nes-text); }
+        .red-line { width: 60px; height: 5px; background: var(--nes-red); margin-bottom: 20px; }
+        
+
+        nav ul { list-style: none; display: flex; gap: 10px; }
+        nav > ul > li { position: relative; padding: 10px 15px; }
+        nav > ul > li > a { text-decoration: none; color: var(--nes-text); font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; transition: color 0.3s ease; }
+        .dropdown-content { display: none; position: absolute; top: 100%; left: 0; background: rgba(16, 20, 30, 0.98); backdrop-filter: blur(10px); min-width: 220px; box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4); padding: 12px 0; border-top: 2px solid var(--nes-red); border-radius: 0 0 12px 12px; }
+        .dropdown-content a { color: var(--nes-muted); padding: 12px 20px; text-decoration: none; display: block; font-size: 14px; transition: 0.2s; }
+        .dropdown-content a:hover { background: rgba(230, 57, 70, 0.1); color: var(--nes-red); }
+        nav > ul > li:hover .dropdown-content { display: block; }
+        .search-box i { font-size: 18px; cursor: pointer; color: var(--nes-text); }
+
+        footer { background: #1a1a1a; color: #fff; padding: 60px 10%; text-align: center; }
+        .footer-social { margin-bottom: 30px; font-size: 24px; }
+        .footer-social i { margin: 0 15px; cursor: pointer; transition: 0.3s; }
+        .footer-social i:hover { color: var(--nes-red); }
+        .footer-links { font-size: 12px; color: #888; }
+        .footer-links a { color: #888; text-decoration: none; margin: 0 10px; text-transform: uppercase; }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        @media (max-width: 1024px) {
+            header {
+                padding: 15px 4%;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
+
+            .hero-about {
+                height: auto;
+                padding: 60px 8%;
+            }
+
+            .content-section {
+                padding: 60px 10%;
+                gap: 30px;
+            }
+
+            .content-section:nth-child(even) {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 720px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+                padding: 15px 5%;
+            }
+
+            nav ul {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .hero-about h1 {
+                font-size: 2.5rem;
+                padding: 12px 20px;
+            }
+
+            .content-section {
+                padding: 40px 5%;
+                gap: 20px;
+                flex-direction: column;
+            }
+
+            .image-box img {
+                width: 100%;
+            }
+
+            footer {
+                padding: 40px 5%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+         <div class="logo"><img src="https://www.nescafe.com/id/sites/default/files/latest_logo_white.png" alt="NESCAFÉ Logo"></div>
+        <nav>
+            <ul>
+                <li><a href="index.html">HOME</a></li>
+                <li>
+                    <a href="produk-kopi.html">Kopi</a></li>
+                <li><a href="resep.html">Resep</a></li>
+                <li><a href="contact.html">Hubungi Kami</a></li>
+                <li><a href="about.html">Tentang Kami</a></li>
+            </ul>
+        </nav>
+        <div class="search-box">
+            <i class="fas fa-search"></i>
+        </div>
+        </header>
+    <section class="hero-about">
+        <h1>Masa Depan Kopi</h1>
+    </section>
+
+    <!-- Keberlanjutan -->
+    <section class="content-section">
+        <div class="text-box">
+            <div class="red-line"></div>
+            <h2>Komitmen Keberlanjutan</h2>
+            <p>Di NESCAFÉ®, kami peduli dengan cara kopi kami ditanam. Kami bekerja sama dengan lebih dari 100.000 petani setiap tahunnya untuk memastikan praktik pertanian yang bertanggung jawab dan menjaga kelestarian bumi untuk generasi mendatang.</p>
+        </div>
+        <div class="image-box">
+            <img src="https://www.nescafe.com/id/themes/custom/nescafe/assets/sustainability-hub/cup.png">
+        </div>
+    </section>
+
+    <!-- Tentang Kami -->
+    <section class="content-section">
+        <div class="text-box">
+            <div class="red-line"></div>
+            <h2>Kisah NESCAFÉ®</h2>
+            <p>Dimulai pada tahun 1938 sebagai solusi untuk kelebihan panen kopi di Brasil, NESCAFÉ® kini telah menjadi merek kopi terfavorit di dunia yang dinikmati di lebih dari 180 negara.</p>
+        </div>
+        <div class="image-box">
+            <img src="https://www.nescafe.com/id/sites/default/files/2023-04/2188%20x%201230_0.jpg">
+        </div>
+    </section>
+     <footer>
+        <div class="footer-social">
+            <i class="fab fa-facebook-f"></i>
+            <i class="fab fa-instagram"></i>
+            <i class="fab fa-youtube"></i>
+            <i class="fab fa-twitter"></i>
+        </div>
+        <div class="footer-links">
+            <a href="#">Kebijakan Privasi</a> | 
+            <a href="#">Syarat & Ketentuan</a> | 
+            <a href="#">Hubungi Kami</a>
+        </div>
+        <p style="font-size: 10px; color: #555; margin-top: 20px;">Web ini bukan web resmi dari NESCAFE, melainkan hanya Web yang saya buat untuk belajar </p>
+    </footer>
+    <script>
+let lastScrollTop = 0;
+const navbar = document.querySelector('header');
+
+window.addEventListener('scroll', function() {
+    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+    if (scrollTop > lastScrollTop && scrollTop > 100) {
+        // Jika scroll ke BAWAH, sembunyikan navbar
+        navbar.classList.add('nav-up');
+    } else {
+        // Jika scroll ke ATAS, munculkan navbar
+        navbar.classList.remove('nav-up');
+    }
+    
+    lastScrollTop = scrollTop;
+});
+
+
+
+    // Mencari semua link yang menuju ke halaman lain
+    document.querySelectorAll('nav a, .btn, .logo a').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault(); // Berhenti pindah halaman mendadak
+            let targetUrl = this.href;
+
+            // Tambahkan kelas fade-out ke body
+            document.body.classList.add('fade-out');
+
+            // Tunggu animasi selesai (0.5 detik), baru pindah halaman
+            setTimeout(() => {
+                window.location.href = targetUrl;
+            }, 500);
+        });
+    });
+</script>
+
+</body>
+</html>

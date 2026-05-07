@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NESCAFÉ® LITE | Make Your World</title>
+
+    <!-- Impor Font Resmi Open Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome untuk Ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-p6Iu+7u4E8yQz3z4h8+G3M0O9iC6M7aV8Gf6xP3j2yK5LJa71ZKZaJ1dPZ1lEwYc55h6z0l0A2EgXISlcfAs0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        /* CSS DETAIL - MENIRU NESCAFE */
+        /* Animasi Muncul */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Animasi Menghilang */
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            to {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+        }
+
+        body {
+            animation: fadeIn 0.8s ease-out;
+            /* Muncul perlahan saat halaman dibuka */
+        }
+
+        /* Kelas tambahan untuk efek keluar */
+        .fade-out {
+            animation: fadeOut 0.5s ease-in forwards;
+        }
+
+        /* Falling Stars Animation */
+        @keyframes fallingStar {
+            0% {
+                opacity: 1;
+                transform: translateY(-100vh) translateX(0) rotate(0deg);
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(100vh) translateX(100px) rotate(360deg);
+            }
+        }
+
+        .stars-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 999;
+            overflow: hidden;
+        }
+
+        .falling-star {
+            position: absolute;
+            color: #c41230;
+            font-size: 1.5rem;
+            animation: fallingStar linear forwards;
+        }
+
+        :root {
+            --nes-red: #e63946;
+            --nes-black: #0f1419;
+            --nes-gray: #16192b;
+            --nes-text: #e8e8e8;
+            --nes-muted: #a0a8b8;
+            --soft-bg: #1a1f2e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--nes-text);
+            background: linear-gradient(180deg, #0a0e14 0%, #0f1419 100%);
+            overflow-x: hidden;
+            min-height: 100vh;
+            scroll-behavior: smooth;
+        }
+
+        /* Navigation & Dropdown */
+        header {
+            background: rgba(26, 31, 46, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(230, 57, 70, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: top 0.4s ease-in-out;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 35px;
+        }
+
+        .nav-up {
+            top: -100px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 18px;
+            align-items: center;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--nes-text);
+        }
+
+        nav>ul>li {
+            position: relative;
+            padding: 10px 15px;
+        }
+
+        nav>ul>li>a {
+            text-decoration: none;
+            color: var(--nes-text);
+            font-weight: 600;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: color 0.3s ease;
+        }
+
+        nav>ul>li>a:hover {
+            color: var(--nes-red);
+        }
+
+        .nav-toggle {
+            display: none;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            color: var(--nes-black);
+            font-size: 24px;
+            padding: 10px;
+        }
+
+        .nav-toggle span {
+            display: block;
+            width: 28px;
+            height: 3px;
+            background: var(--nes-black);
+            border-radius: 2px;
+            position: relative;
+        }
+
+        .nav-toggle span::before,
+        .nav-toggle span::after {
+            content: '';
+            position: absolute;
+            width: 28px;
+            height: 3px;
+            background: var(--nes-black);
+            border-radius: 2px;
+            left: 0;
+        }
+
+        .nav-toggle span::before {
+            top: -9px;
+        }
+
+        .nav-toggle span::after {
+            top: 9px;
+        }
+
+        /* Sistem Dropdown */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: rgba(16, 20, 30, 0.98);
+            backdrop-filter: blur(10px);
+            min-width: 220px;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+            padding: 12px 0;
+            border-top: 2px solid var(--nes-red);
+            border-radius: 0 0 12px 12px;
+        }
+
+        .dropdown-content a {
+            color: var(--nes-muted);
+            padding: 12px 20px;
+            text-decoration: none;
+            display: block;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+
+        .dropdown-content a:hover {
+            background: rgba(230, 57, 70, 0.1);
+            color: var(--nes-red);
+        }
+
+        nav>ul>li:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            padding: 0 10%;
+            color: #fff;
+            background: linear-gradient(135deg, rgba(10, 14, 20, 0.8) 0%, rgba(26, 31, 46, 0.8) 100%);
+            overflow: hidden;
+        }
+
+        .hero-slider {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .hero-slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+        }
+
+        .hero-slide.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .hero-slide video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .hero-controls {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            z-index: 3;
+            display: flex;
+            gap: 10px;
+        }
+
+        .slide-btn {
+            background: rgba(255, 255, 255, 0.85);
+            border: none;
+            color: #000;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: transform 0.2s ease, background 0.2s ease;
+        }
+
+        .slide-btn:hover {
+            transform: scale(1.05);
+            background: rgba(255, 255, 255, 1);
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.35);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 650px;
+            padding: 20px 0;
+            transition: transform 0.2s ease-out;
+            transform-style: preserve-3d;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 800;
+            line-height: 1.05;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+            transition: transform 0.2s ease-out;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 1.5vw, 1.2rem);
+            max-width: 520px;
+            margin-bottom: 35px;
+            line-height: 1.7;
+            color: rgba(255,255,255,0.95);
+        }
+
+        .btn-pill {
+            background: var(--nes-red);
+            color: #fff;
+            padding: 15px 45px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 12px;
+            text-transform: uppercase;
+            transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+            border: 2px solid transparent;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-pill:hover {
+            background: #ff4757;
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px rgba(230, 57, 70, 0.3);
+        }
+
+        .product-card {
+            background: rgba(26, 31, 46, 0.6);
+            border: 1px solid rgba(230, 57, 70, 0.15);
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), transform 0.3s ease, box-shadow 0.3s ease;
+            transform-style: preserve-3d;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            background: rgba(26, 31, 46, 0.8);
+            border-color: var(--nes-red);
+            box-shadow: 0 24px 48px rgba(230, 57, 70, 0.2);
+        }
+
+        .section-title p {
+            color: #5a4d42;
+            max-width: 760px;
+            margin: 0 auto;
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        /* Product Cards */
+        .section-title {
+            text-align: center;
+            padding: 80px 5% 40px;
+        }
+
+        .section-title h2 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 0 10% 80px;
+        }
+
+        /* Support Team Section */
+        .support-section {
+            background: rgba(26, 31, 46, 0.8);
+            padding: 80px 10%;
+            text-align: center;
+        }
+
+        .support-section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            color: var(--nes-text);
+        }
+
+        .support-section p {
+            max-width: 600px;
+            margin: 0 auto 40px;
+            color: var(--nes-muted);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .team-member {
+            background: rgba(26, 31, 46, 0.6);
+            border: 1px solid rgba(230, 57, 70, 0.15);
+            border-radius: 12px;
+            padding: 30px 20px;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .team-member:hover {
+            transform: translateY(-8px);
+            background: rgba(26, 31, 46, 0.8);
+            border-color: var(--nes-red);
+            box-shadow: 0 24px 48px rgba(230, 57, 70, 0.2);
+        }
+
+        .team-member .avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--nes-red);
+        }
+
+        .team-member .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .team-member h3 {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+            color: var(--nes-text);
+        }
+
+        .team-member .role {
+            color: var(--nes-red);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .product-card img {
+            width: 100%;
+            max-width: 200px;
+            margin-bottom: 20px;
+        }
+
+        .product-card h3 {
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Footer */
+        footer {
+            background: #1a1a1a;
+            color: #fff;
+            padding: 60px 10%;
+            text-align: center;
+        }
+
+        .footer-social {
+            margin-bottom: 30px;
+            font-size: 24px;
+        }
+
+        .footer-social i {
+            margin: 0 15px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .footer-social i:hover {
+            color: var(--nes-red);
+        }
+
+        .footer-links {
+            font-size: 12px;
+            color: #888;
+        }
+
+        .footer-links a {
+            color: #888;
+            text-decoration: none;
+            margin: 0 10px;
+            text-transform: uppercase;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        @media (max-width: 1024px) {
+            header {
+                padding: 15px 4%;
+            }
+
+            nav>ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
+
+            nav>ul>li {
+                padding: 8px 10px;
+            }
+
+            .hero {
+                min-height: 75vh;
+                padding: 0 5%;
+            }
+
+            .hero h1 {
+                font-size: 4rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+                max-width: 100%;
+            }
+
+            .btn-pill {
+                padding: 14px 35px;
+            }
+
+            .product-grid {
+                padding: 0 5% 60px;
+            }
+
+            .support-section {
+                padding: 60px 5%;
+            }
+
+            .team-grid {
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 720px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .logo img {
+                height: 30px;
+            }
+
+            .hero {
+                min-height: 65vh;
+                padding: 0 5%;
+            }
+
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .btn-pill {
+                padding: 12px 28px;
+                font-size: 11px;
+            }
+
+            .product-card {
+                padding: 30px;
+            }
+
+            .product-grid {
+                gap: 20px;
+            }
+
+            footer {
+                padding: 40px 5%;
+            }
+        }
+
+        @media (max-width: 720px) {
+            .nav-toggle {
+                display: block;
+            }
+
+            nav {
+                width: 100%;
+            }
+
+            nav>ul {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background: rgba(16, 20, 30, 0.98);
+                border-radius: 12px;
+                overflow: hidden;
+                box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            }
+
+            nav>ul.open {
+                display: flex;
+            }
+
+            nav>ul>li {
+                width: 100%;
+                padding: 0;
+            }
+
+            nav>ul>li>a {
+                display: block;
+                width: 100%;
+                padding: 16px 18px;
+                color: var(--nes-black);
+                border-top: 1px solid #f1f1f1;
+            }
+
+            nav>ul>li:first-child>a {
+                border-top: none;
+            }
+
+            .search-box {
+                display: none;
+            }
+
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .logo img {
+                height: 30px;
+            }
+
+            .hero {
+                min-height: 65vh;
+                padding: 0 5%;
+            }
+
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .btn-pill {
+                padding: 12px 28px;
+                font-size: 11px;
+            }
+
+            .product-card {
+                padding: 30px;
+            }
+
+            .product-grid {
+                gap: 20px;
+            }
+
+            footer {
+                padding: 40px 5%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Stars Container -->
+    <div class="stars-container" id="starsContainer"></div>
+
+    <!-- NAVBAR DENGAN DROPDOWN -->
+    <header>
+        <div class="logo">
+            <img src="https://www.nescafe.com/id/sites/default/files/latest_logo_white.png" alt="NESCAFÉ Logo">
+        </div>
+        <button class="nav-toggle" aria-label="Buka menu" aria-expanded="false"><span></span></button>
+        <nav>
+            <ul>
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="produk-kopi.html">Kopi</a></li>
+                <li>
+                    <a href="resep.html">Resep <i class="fas fa-chevron-down" style="font-size: 10px;"></i></a>
+
+                </li>
+                <li><a href="contact.html">Hubungi Kami</a></li>
+                <li><a href="about.html">Tentang Kami</a></li>
+            </ul>
+        </nav>
+        <div class="search-box">
+            <i class="fas fa-search" style="font-size: 18px; cursor: pointer;"></i>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-slider">
+            <div class="hero-slide active">
+                <video autoplay muted loop playsinline src="SnapTik.Net_7165072440098311451_hd.mp4"></video>
+            </div>
+            <div class="hero-slide">
+                <video autoplay muted loop playsinline src="SnapTik.Net_7365572969352924432_hd.mp4"></video>
+            </div>
+        </div>
+        <div class="hero-controls">
+            <button class="slide-btn prev" aria-label="Sebelumnya">‹</button>
+            <button class="slide-btn next" aria-label="Berikutnya">›</button>
+        </div>
+        <div class="hero-content">
+            <h1>Make Your<br>World</h1>
+            <p>Bersama NESCAFÉ®, mari kita buat perubahan bermakna mulai dari cangkir Anda hari ini.</p>
+            <a href="#" class="btn-pill">Temukan Lebih Lanjut</a>
+        </div>
+    </section>
+
+    <!-- PRODUCTS -->
+    <div class="section-title">
+        <h2>Temukan cita rasa Anda</h2>
+        <p>Jelajahi pilihan kopi terbaik dari NESCAFÉ® Indonesia</p>
+    </div>
+
+    <section class="product-grid">
+        <div class="product-card">
+            <img src="https://www.nescafe.com/id/sites/default/files/styles/plp_card_image/public/2025-03/01_NESCAFE%20Classic%20New%20Label%203D%20Preview_45g_960.png.webp?itok=OoUIsoD-"
+                alt="Classic">
+            <h3>NESCAFÉ Classic</h3>
+        </div>
+        <div class="product-card">
+            <img src="https://www.nescafe.com/id/sites/default/files/styles/plp_card_image/public/2023-08/208961832%20-%20HP_Gold-Regular-100_960x960.png.webp?itok=cu4g0YPu"
+                alt="Gold">
+            <h3>NESCAFÉ Gold Decaf</h3>
+        </div>
+        <div class="product-card">
+            <img src="https://www.nescafe.com/id/sites/default/files/styles/plp_card_image/public/2025-03/ID_NESCAFE_0723_Packshot_NESCAFE%203in1%20Original%20PBG_30x17.5g%20960px.png.webp?itok=vwDbD1t0"
+                alt="3in1">
+            <h3>NESCAFÉ Original 3in1</h3>
+        </div>
+    </section>
+
+    <!-- SUPPORT TEAM -->
+    <section class="support-section">
+        <h2>Tim Support Kami</h2>
+        <p>Dapatkan bantuan dari tim ahli kami yang siap membantu Anda dengan pertanyaan tentang produk NESCAFÉ®</p>
+        <div class="team-grid">
+            <div class="team-member">
+                <div class="avatar">
+                    <img src="images/ariel.png" alt="Foto Ariel">
+                </div>
+                <h3>Ariel</h3>
+                <div class="role">Support Specialist</div>
+            </div>
+            <div class="team-member">
+                <div class="avatar">
+                    <img src="images/bayu.png" alt="Foto Bayu">
+                </div>
+                <h3>Bayu</h3>
+                <div class="role">Support Specialist</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-social">
+            <i class="fab fa-facebook-f"></i>
+            <i class="fab fa-instagram"></i>
+            <i class="fab fa-youtube"></i>
+            <i class="fab fa-twitter"></i>
+        </div>
+        <div class="footer-links">
+            <a href="#">Kebijakan Privasi</a> |
+            <a href="#">Syarat & Ketentuan</a> |
+            <a href="contact.html">Hubungi Kami</a>
+        </div>
+        <p style="font-size: 10px; color: #555; margin-top: 20px;">Web ini bukan web resmi dari NESCAFE, melainkan hanya
+            Web yang saya buat untuk belajar </p>
+    </footer>
+    <script>
+        // Falling Stars Animation on Page Load
+        function createFallingStars() {
+            const starsContainer = document.getElementById('starsContainer');
+            const starCount = 20; // Number of stars to create
+            const duration = 3; // Animation duration in seconds
+
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.className = 'falling-star';
+                star.innerHTML = '★';
+                
+                // Random horizontal position
+                const randomX = Math.random() * 100;
+                const randomDelay = Math.random() * 0.5; // Stagger the start
+                const randomDuration = 2.5 + Math.random() * 1.5; // Vary animation speed
+                
+                star.style.left = randomX + '%';
+                star.style.animationDuration = randomDuration + 's';
+                star.style.animationDelay = randomDelay + 's';
+                
+                starsContainer.appendChild(star);
+                
+                // Remove star after animation completes
+                setTimeout(() => {
+                    star.remove();
+                }, (randomDelay + randomDuration) * 1000);
+            }
+        }
+
+        // Trigger falling stars when page loads
+        window.addEventListener('load', () => {
+            createFallingStars();
+        });
+
+        let lastScrollTop = 0;
+        const navbar = document.querySelector('header');
+
+        window.addEventListener('scroll', function () {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            if (scrollTop > lastScrollTop && scrollTop > 100) {
+                // Jika scroll ke BAWAH, sembunyikan navbar
+                navbar.classList.add('nav-up');
+            } else {
+                // Jika scroll ke ATAS, munculkan navbar
+                navbar.classList.remove('nav-up');
+            }
+
+            lastScrollTop = scrollTop;
+        });
+
+
+
+        // Mencari semua link yang menuju ke halaman lain
+        document.querySelectorAll('nav a, .btn, .logo a').forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault(); // Berhenti pindah halaman mendadak
+                let targetUrl = this.href;
+
+                // Tambahkan kelas fade-out ke body
+                document.body.classList.add('fade-out');
+
+                // Tunggu animasi selesai (0.5 detik), baru pindah halaman
+                setTimeout(() => {
+                    window.location.href = targetUrl;
+                }, 500);
+            });
+        });
+
+        const navToggle = document.querySelector('.nav-toggle');
+        const navMenu = document.querySelector('nav>ul');
+
+        if (navToggle && navMenu) {
+            navToggle.addEventListener('click', () => {
+                const isOpen = navMenu.classList.toggle('open');
+                navToggle.setAttribute('aria-expanded', isOpen);
+            });
+        }
+
+        const slides = document.querySelectorAll('.hero-slide');
+        const prevButton = document.querySelector('.slide-btn.prev');
+        const nextButton = document.querySelector('.slide-btn.next');
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+                const video = slide.querySelector('video');
+                if (video) {
+                    if (i === index) {
+                        video.currentTime = 0;
+                        video.play().catch(() => {});
+                    } else {
+                        video.pause();
+                    }
+                }
+            });
+        }
+
+        if (prevButton && nextButton && slides.length > 0) {
+            prevButton.addEventListener('click', () => {
+                currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+                showSlide(currentSlide);
+            });
+
+            nextButton.addEventListener('click', () => {
+                currentSlide = (currentSlide + 1) % slides.length;
+                showSlide(currentSlide);
+            });
+        }
+
+        const hero = document.querySelector('.hero');
+        const heroTitle = document.querySelector('.hero h1');
+
+        if (hero) {
+            hero.addEventListener('mousemove', (event) => {
+                const rect = hero.getBoundingClientRect();
+                const mouseX = event.clientX - rect.left;
+                const mouseY = event.clientY - rect.top;
+                const moveX = (mouseX / rect.width - 0.5) * 20;
+                const moveY = (mouseY / rect.height - 0.5) * 20;
+
+                heroTitle.style.transform = `translate3d(${moveX}px, ${moveY}px, 0)`;
+                document.querySelectorAll('.hero-controls .slide-btn').forEach(btn => {
+                    btn.style.transform = `translate3d(${moveX / 2}px, ${moveY / 2}px, 0)`;
+                });
+            });
+
+            hero.addEventListener('mouseleave', () => {
+                heroTitle.style.transform = 'translate3d(0, 0, 0)';
+                document.querySelectorAll('.hero-controls .slide-btn').forEach(btn => {
+                    btn.style.transform = '';
+                });
+            });
+        }
+
+    </script>
+
+
+</body>
+
+</html>
